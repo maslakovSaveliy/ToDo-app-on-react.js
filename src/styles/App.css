@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root {
+  display: flex;
+  justify-content: center;
+}
+.App {
+  width: 800px;
+}
+.post {
+  display: flex;
+  padding: 15px;
+  border: 2px solid teal;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+.post-enter {
+  /*Тут говорим, что когда анимация только, то -350 px*/
+  transform: translateX(-350px);
+}
+.post-enter-active {
+  transform: translateX(0px);
+  /*Здесь меняем opacity на all*/
+  transition: all 500ms ease-in;
+}
+.post-exit {
+  opacity: 1;
+}
+.post-exit-active {
+  /*Сюда пишем данную логику. По сути говорим что анимация при удалении будет съезжать по оси X влево на 250 писклей*/
+  transform: translateX(-350px);
+  /*Здесь меняем opacity на all*/
+  transition: all 500ms ease-in;
+}
