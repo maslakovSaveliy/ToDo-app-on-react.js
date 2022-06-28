@@ -6,7 +6,6 @@ import { useFetching } from "../hooks/useFetching";
 const PostIdPage = () => {
   const params = useParams();
   const [post, setPost] = useState({});
-  // Полученный комментарий нам необходимо будет сохранить в состояние, поэтому создаём новое состояние, которое по дефолту принимает пустой массив
   const [comments, setComments] = useState([]);
   const [fetchPostById, isLoading, error] = useFetching(async (id) => {
     const response = await PostService.getById(id);
@@ -15,12 +14,10 @@ const PostIdPage = () => {
   const [fetchComments, isComLoading, comError] = useFetching(async (id) => {
     // Вызываем функцию
     const response = await PostService.getCommentsByPostId(id);
-    // И после того, как мы получим комментарии от сервера, мы сетим их в состояние
     setComments(response.data);
   });
   useEffect(() => {
     fetchPostById(params.id);
-    // И в useEffect вызываем функцию для получения комментариев, и аргументом передаём туда id поста
     fetchComments(params.id);
   }, []);
   return (
@@ -34,14 +31,11 @@ const PostIdPage = () => {
         </div>
       )}
       <h1>Комментарии</h1>
-      {/*Остаётся эти комментарии отрисовать*/}
-      {/*Если они ещё грузятся, то будем отрисовывать компонент Loader, если всё загрузилось то будем отрисовывать какую-то структуру*/}
       {isComLoading ? (
         <Loader />
       ) : (
         <div>
           {comments.map((comm) => (
-            // Просто вставим email пользователя, а под ним его комментарий
             <div style={{ marginTop: 15 }}>
               <h5>{comm.email}</h5>
               <div>{comm.body}</div>
