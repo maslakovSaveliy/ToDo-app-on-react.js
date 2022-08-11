@@ -1,22 +1,28 @@
 import About from "../pages/About";
 import Error from "../pages/Error";
+import Login from "../pages/Login";
 import PostIdPage from "../pages/PostIdPage";
 import Posts from "../pages/Posts";
-export const routes = [
+export const privateRoutes = [
+  {
+    path: "/",
+    element: About,
+  },
   {
     path: "/about",
-    component: About,
+    element: About,
   },
   {
     path: "/posts",
-    component: Posts,
+    element: Posts,
   },
   {
     path: "/posts/:id",
-    component: PostIdPage,
+    element: PostIdPage,
   },
   {
     path: "*",
-    component: Error,
+    element: Error,
   },
 ];
+export const publicRoutes = [{ path: "/login", element: Login }];
